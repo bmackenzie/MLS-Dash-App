@@ -1,19 +1,24 @@
 # Import necessary libraries
 from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output
+import dash
+import dash_bootstrap_components as dbc
 import sqlite3
 import pandas as pd
 from difflib import SequenceMatcher
 import plotly.express as px
 import plotly.graph_objects as go
-# Connect to main app.py file
-from app import app
 
 # Connect to your app pages
 from pages import leaders, search
 
 # Connect the navbar to the index
 from components import navbar
+
+app = dash.Dash(__name__,
+                external_stylesheets=[dbc.themes.SOLAR],
+                meta_tags=[{"name": "viewport", "content": "width=device-width"}],
+                suppress_callback_exceptions=True)
 
 # define the navbar
 nav = navbar.Navbar()
