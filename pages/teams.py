@@ -26,13 +26,10 @@ def generate_table(dataframe, max_rows=5):
 with sqlite3.connect('mlsdb.sqlite') as conn:
     query = conn.execute("""
     SELECT
-    p.name Name,
-    p.squad Squad,
-    ps.gls Goals
-    FROM playerShooting ps
-    INNER JOIN players p
-    	ON ps.player_id = p.id
-    ORDER BY goals DESC;""")
+    ss.squad Squad,
+    ss.gls Goals
+    FROM squadShooting
+    ORDER BY Goals DESC;""")
     cols = [column[0] for column in query.description]
     goalLeaders= pd.DataFrame.from_records(data = query.fetchall(), columns = cols)
 
